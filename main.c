@@ -1,24 +1,38 @@
 #include <stc\STC89C5xRC.H>
 #include <intrins.h>
-void Delay100ms();
+void Delay();
+unsigned char code SegmentDisplay7CC[]={0x3F,0x06,0x5B,0x4F,0x66,0X6D,0X7D,0X07,0X7F,0X6F};
 void main(){
-	unsigned char tP0=0xFC;
-	//P26=0;
-	do{
-		P1=tP0;
-	  Delay100ms();
-		tP0=_crol_(tP0,1);
-	}while(1);
+	unsigned char num;
+	
+	
+	P26=0;
+	P27=0;
+	P0=0xFE;
+	P27=1;
+	P27=0;
+	
+	for(num=0;num<=9||(num=0,1);num++){
+	P0=SegmentDisplay7CC[num];
+	P26=1;
+	P26=0;
+	Delay();
+	}
 	
 }
-void Delay100ms()		//@11.0592MHz
-{
-	unsigned char i, j;
+void Delay()		//@11.0592MHz
+{//1s
+	unsigned char i, j, k;
 
-	i = 180;
-	j = 10;
+	_nop_();
+	i = 8;
+	j = 1;
+	k = 243;
 	do
 	{
-		while (--j);
+		do
+		{
+			while (--k);
+		} while (--j);
 	} while (--i);
 }
