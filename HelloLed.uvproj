@@ -391,6 +391,11 @@
               <FileType>5</FileType>
               <FilePath>.\GtxTX1C.h</FilePath>
             </File>
+            <File>
+              <FileName>GtxTX1C.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\GtxTX1C.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
