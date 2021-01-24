@@ -9,6 +9,6 @@ void main(){
 
 	//SingleSegDisplay(5,1);
 	while(1){
-	SegDisplay(123456);
+	SegDisplay(1256);
 	}
 }

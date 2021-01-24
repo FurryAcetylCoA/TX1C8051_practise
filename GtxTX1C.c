@@ -31,11 +31,10 @@ void SingleSegDisplay(uint8 which,uint8 num){
 
 }
 
-void SegDisplay(uint32 num){	//控制数码管显示数字
-	uint8 ii;	
-	for(ii=6;ii>0;ii--)
-	{
-		SingleSegDisplay(ii-1,num%10);
+void SegDisplay(uint32 num){	//控制数码管显示数字,右对齐
+	uint8 ii=5;	
+	do{
+		SingleSegDisplay(ii,num%10);
 		num=num/10;
-	}
+	}while(num!=0&&ii--!=0);
 }
