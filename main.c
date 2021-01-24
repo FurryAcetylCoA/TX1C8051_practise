@@ -5,7 +5,10 @@
 
 
 void main(){
-while(1){
-	SegDisplay(15,0);
-}
+
+
+	//SingleSegDisplay(5,1);
+	while(1){
+	SegDisplay(123456);
+	}
 }

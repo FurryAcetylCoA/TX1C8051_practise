@@ -33,6 +33,6 @@ extern uint8c SegmentDisplay7CC[10];
 //工具函数
 
 void SingleSegDisplay(uint8 which,uint8 num);//控制某一个数码管(0-5),显示数字
-void SegDisplay(uint8 num);         //控制数码管显示数字
+void SegDisplay(uint32 num);         //控制数码管显示数字
 
 #endif //__GtxTX1C_h__

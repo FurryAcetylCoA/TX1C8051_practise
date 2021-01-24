@@ -30,22 +30,12 @@ void SingleSegDisplay(uint8 which,uint8 num){
 	P26=0;
 
 }
-void SegDisplay(uint8 num){	//控制数码管显示数字
-	uint8 ii;	
-	uint8 i, j;
 
-	for(ii=0;ii<10;ii++)
+void SegDisplay(uint32 num){	//控制数码管显示数字
+	uint8 ii;	
+	for(ii=6;ii>0;ii--)
 	{
-	SingleSegDisplay(ii,num%10);
-	num=num/10;
-		
-	i = 2;
-	j = 199;
-	do
-	{
-		while (--j);
-	} while (--i);
-	
-	if(num==0){break;}
+		SingleSegDisplay(ii-1,num%10);
+		num=num/10;
 	}
 }
