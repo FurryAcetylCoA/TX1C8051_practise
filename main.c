@@ -5,10 +5,15 @@
 
 
 void main(){
-
-
-	//SingleSegDisplay(5,1);
-	while(1){
-	SegDisplay(1256);
-	}
+	uint8 cod=0;
+do{
+    if(LCD_EN==0){
+			Delay10ms();
+		  if(LCD_EN==0){
+				SegDisplay(++cod);
+				while(LCD_EN==0);
+			}
+		}
+	
+	}while(1);	
 }
