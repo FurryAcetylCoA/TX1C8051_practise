@@ -5,13 +5,23 @@ GtxTX1C.h
 
 2021 AcetylCoA
 --------------------------------------------------------------------------*/
+#ifndef __GtxTX1C_h__
+#define __GtxTX1C_h__
 
 #include <stc\STC89C5xRC.H>
 #include <intrins.h>
 
 
-#ifndef __GtxTX1C_h__
-#define __GtxTX1C_h__
+
+#define _DEPENDANCY_OF_TX1C_C_FILE_ //注释此宏后 本头文件将不再依赖GtxTX1C.c
+
+
+
+#ifdef _DEPENDANCY_OF_TX1C_C_FILE_  //提高可迁移性
+#define _USING_TX1C_CUSTOM_FUNCTIONS_ 
+#define _USING_TX1C_CUSTOM_CONSTS_ 
+#endif // _DEPENDANCY_OF_TX1C_C_FILE_
+
 //基础8051类型别名
 
 typedef unsigned char uint8;
@@ -65,10 +75,13 @@ sbit DS18B20  = P2^2;
 sbit C02_SCL  = P2^1;
 sbit C02_SDA  = P2^0;
 
+#ifdef _USING_TX1C_CUSTOM_CONSTS_
 //码表
 extern uint8c SegmentDisplay7CC[10];
+#endif // _USING_TX1C_CUSTOM_CONSTS_
 
 
+#ifdef _USING_TX1C_CUSTOM_FUNCTIONS_
 //工具函数
 
 void SingleSegDisplay(uint8 which,uint8 num);//控制某一个数码管(0-5),显示数字
@@ -80,6 +93,6 @@ void Delay();
  /*查询某个管脚是否有按键按下*/	/*   if(which==0){\
 																		Delay10ms();}
 	*/
-	
+#endif //_USING_TX1C_CUSTOM_FUNCTIONS_
 	
 #endif //__GtxTX1C_h__
