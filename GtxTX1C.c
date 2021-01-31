@@ -7,12 +7,13 @@ uint8c SegmentDisplay7CC[]={0x3F,0x06,0x5B,0x4F,0x66,0X6D,0X7D,0X07,0X7F,0X6F};
 
 
 void Delay()		//@11.0592MHz
-{//1s
-	unsigned char i, j, k;
+{//0.8s
+unsigned char i, j, k;
+
 	_nop_();
-	i = 8;
-	j = 1;
-	k = 243;
+	i = 6;
+	j = 155;
+	k = 91;
 	do
 	{
 		do
