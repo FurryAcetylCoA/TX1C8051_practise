@@ -3,36 +3,35 @@
 #include "GtxTX1C.h"
 
 uint32 counter;
-void initCounter0();
+void initCounter2();
 
 void main(){
 	counter=0;
-	initCounter0();
+	initCounter2();
 do{
 	SegDisplay(counter);
 	if(RD==0){
-		TR0=1;
+		TR2=1;
 	}
 	if(WR==0){
-		TR0=0;
+		TR2=0;
 	}	
 }while(1);	
 }
 //@11.0592MHz 12clock=1085ns
-void initCounter0(){//10ms
-	TR0=0;
+void initCounter2(){//10ms
+	TR2=0;
 	
-	TMOD=0x01;
+	C_T2=C_T2&0xC0;
 	
 	EA=1;
-	ET0=1;
+	ET2=1;
 	
-	TH0=(56320)/256;
-	TL0=(56320)%256;
+	RCAP2H=TH2=(56320)/256;
+	RCAP2L=TL2=(56320)%256;
 }
-void int_Counter0 () interrupt 1{
-	TH0=(56320)/256;
-	TL0=(56320)%256;
+void int_Counter2 () interrupt 5{
+	TF2=0;
 	
 	counter++;
 	if(counter>=100000){
