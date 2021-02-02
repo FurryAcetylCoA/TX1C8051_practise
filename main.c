@@ -2,34 +2,40 @@
 #include <intrins.h>
 #include "GtxTX1C.h"
 
+uint32 counter;
+void initCounter0();
 
-
-void main(){//行在低四位 列在高四位
-	uint8 gundong=0xEE;//1110 1110
-	uint8 read1,read2;
-	uint32 keyCode=5; //keyCode对应的是丝印上的   5是dummyCode 不代表五号键
-	uint8 i;
+void main(){
+	counter=0;
+	initCounter0();
 do{
-	for(i=0;i<4||(i=0,keyCode=5);i++){
-  P3=gundong|0x0F; //为了读取行 低四位需为1
-	read1=P3; //先读取低四位行线
-	Delay10ms();
-	read2=P3;//抖动消除
-	if(read1==read2)
-	{
-		switch(read2|0xF0)//高四位掩1 对低四位进行判断
-		{
-			case 0xF7 : keyCode+=4;		 // 0111
-		  case 0xFB : keyCode+=4;
-	  	case 0xFD : keyCode+=4;
-	   	case 0xFE : keyCode+=i+1;// 1110
-		}
-		//	while(P3|0xF0!=0xFF);//等待按键抬起//鉴于数码管是扫描显示的 这里注释掉了
+	SegDisplay(counter);
+	if(RD==0){
+		TR0=1;
+	}
+	if(WR==0){
+		TR0=0;
 	}	
-	if(keyCode!=5){
-		SegDisplay(keyCode);
-	}
-	gundong=_crol_(gundong,1);
-	}
 }while(1);	
+}
+//@11.0592MHz 12clock=1085ns
+void initCounter0(){//10ms
+	TR0=0;
+	
+	TMOD=0x01;
+	
+	EA=1;
+	ET0=1;
+	
+	TH0=(56320)/256;
+	TL0=(56320)%256;
+}
+void int_Counter0 () interrupt 1{
+	TH0=(56320)/256;
+	TL0=(56320)%256;
+	
+	counter++;
+	if(counter>=100000){
+		counter=0;
+	}
 }
