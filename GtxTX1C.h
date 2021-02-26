@@ -78,6 +78,12 @@ sbit C02_SDA  = P2^0;
 #ifdef _USING_TX1C_CUSTOM_CONSTS_
 //码表
 extern uint8c SegmentDisplay7CC[10];
+
+enum LatchSelectEnum{
+		kSEG_DLE=0x80,
+		kSEG_WLE=0x40,
+		kLED_LE=0x20
+};
 #endif // _USING_TX1C_CUSTOM_CONSTS_
 
 
@@ -88,6 +94,7 @@ void SingleSegDisplay(uint8 which,uint8 num);//控制某一个数码管(0-5),显
 void SegDisplay(uint32 num);         //控制数码管显示数字
 void Delay10ms();
 void Delay();
+void Latch573(enum LatchSelectEnum which,uint8 aData);            //控制板子上的三个锁存器
 
 /*#define QueryKeyDown(which,payload) do{  \
  /*查询某个管脚是否有按键按下*/	/*   if(which==0){\

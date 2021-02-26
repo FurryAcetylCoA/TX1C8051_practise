@@ -56,4 +56,18 @@ void SegDisplay(uint32 num){	//控制数码管显示数字,右对齐
 	}while(num!=0&&ii--!=0);
 }
 
+void Latch573(enum LatchSelectEnum which,uint8 aData){   //控制锁存器
+	//uint8 tempP0backup;
+	
+	//tempP0backup=P0;
+
+	
+	P0=aData;
+	_nop_();
+	P2=P2^which;
+	_nop_();
+	P2=P2|which;
+
+	//P0=tempP0backup;
+}
 
