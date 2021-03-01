@@ -80,9 +80,10 @@ sbit C02_SDA  = P2^0;
 extern uint8c SegmentDisplay7CC[10];
 
 enum LatchSelectEnum{
-		kSEG_DLE=0x80,
-		kSEG_WLE=0x40,
-		kLED_LE=0x20
+		kSEG_DLE=0x40,//P26
+		kSEG_WLE=0x80,//P27
+		kLED_LE=0x20,
+		kALL_LE=0xE0
 };
 #endif // _USING_TX1C_CUSTOM_CONSTS_
 
