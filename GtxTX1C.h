@@ -96,10 +96,6 @@ void Delay10ms();
 void Delay();
 void Latch573(enum LatchSelectEnum which,uint8 aData);            //控制板子上的三个锁存器
 
-/*#define QueryKeyDown(which,payload) do{  \
- /*查询某个管脚是否有按键按下*/	/*   if(which==0){\
-																		Delay10ms();}
-	*/
 #endif //_USING_TX1C_CUSTOM_FUNCTIONS_
 	
 #endif //__GtxTX1C_h__
