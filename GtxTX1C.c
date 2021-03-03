@@ -51,10 +51,13 @@ void SegDisplay(uint32 num){	//控制数码管显示数字,右对齐
 }
 
 void Latch573(enum LatchSelectEnum which,uint8 aData){   //控制锁存器
-
 	P2=P2&(~kALL_LE);//禁用所有锁存器
-	P0=aData;		 //写入总线
+	if(which!=kLED_LE){ //LED_LE位于P1总线，而其他锁存器位于P0总线
+		P0=aData;		 
+	}
+	else{
+		P1=aData;
+	}
 	P2=P2|which;	 //使能对应的锁存器
 	P2=P2^which;
 }
-
