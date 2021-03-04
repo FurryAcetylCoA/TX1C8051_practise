@@ -92,10 +92,12 @@ enum LatchSelectEnum{
 //工具函数
 
 void SingleSegDisplay(uint8 which,uint8 num);//控制某一个数码管(0-5),显示数字
-void SegDisplay(uint32 num);         //控制数码管显示数字
-void Delay992us();
-void Delay(uint16 ms);
+void SegDisplay(uint32 num);         		 //控制数码管显示数字
+void Delay992us();							 //延时一个奇怪的时间，供delay函数使用				
+void Delay(uint16 ms);						 //延时
 void Latch573(enum LatchSelectEnum which,uint8 aData);            //控制板子上的三个锁存器
+void Lcd1602Cmd(uint8 Cmd);				     //向1602发送指令
+void Lcd1602Data(uint8 aData);				 //向1602发送数据
 
 #endif //_USING_TX1C_CUSTOM_FUNCTIONS_
 	
