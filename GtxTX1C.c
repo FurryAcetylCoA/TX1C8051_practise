@@ -4,27 +4,19 @@
 uint8c SegmentDisplay7CC[]={0x3F,0x06,0x5B,0x4F,0x66,0X6D,0X7D,0X07,0X7F,0X6F};
 
 
-void Delay(){//0.8s@11.0592MHz
-unsigned char i, j, k;
-	_nop_();
-	i = 6;
-	j = 155;
-	k = 91;
-	do
-	{
-		do
-		{
-			while (--k);
-		} while (--j);
-	} while (--i);
+void Delay(uint16 ms){//@11.0592MHz
+	while(ms--){
+		Delay992us();
+	}
 }
 
-void Delay10ms()		//@11.0592MHz
-{
+void Delay992us(){ //函数跳转和Delay函数中的自减需要8ns 所以这里用延迟992us实现延迟1ms
+
 	unsigned char i, j;
 
-	i = 108;
-	j = 145;
+	_nop_();
+	i = 2;
+	j = 196;
 	do
 	{
 		while (--j);
@@ -61,3 +53,5 @@ void Latch573(enum LatchSelectEnum which,uint8 aData){   //控制锁存器
 	P2=P2|which;	 //使能对应的锁存器
 	P2=P2^which;
 }
+
+
