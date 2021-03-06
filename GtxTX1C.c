@@ -10,8 +10,7 @@ void Delay(uint16 ms){//@11.0592MHz
 	}
 }
 
-void Delay992us(){ //函数跳转和Delay函数中的自减需要8ns 所以这里用延迟992us实现延迟1ms
-
+void Delay992us(){ //函数跳转和上层Delay函数循环变量的自减需要8us 所以这里用延迟992us实现延迟1ms
 	unsigned char i, j;
 
 	_nop_();
@@ -54,9 +53,9 @@ void Latch573(enum LatchSelectEnum which,uint8 aData){   //控制锁存器
 	P2=P2^which;
 }
 
-void Lcd1602Cmd(uint8 Cmd){
+void Lcd1602Cmd(enum Lcd1602CmdEnum CmdType,enum Lcd1602CmdFlagsEnum CmdFlags){ //Flags请一次性或进来
 	LCD_RS=0;
-	P0=Cmd;
+	P0=CmdType&CmdFlags;
 	LCD_EN=1;
 	Delay(10);
 	LCD_EN=0;

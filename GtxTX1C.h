@@ -93,34 +93,37 @@ enum Lcd1602CmdEnum{
 	    cDisplayOnOff = b00001111,
 	    cScreenShift  = b00011111, //向左\右 移动整个屏幕\光标
 	    cFunctionSet  = b00111111, //基本配置 需要先设置本条
-	    cCGRAMAddSet  = b01111111,
-	    cDDRAMAddSet  = b11111111    
+		cCGRAMAddSet  = b01111111, //这两个指令直接传入地址即可
+		cDDRAMAddSet  = b11111111  //不需要从Flags里面选
 };
 
-enum Lcd1602CmdFlagsEnum{
+enum Lcd1602CmdFlagsEnum{  //没有语法提示我要报警了
+	// dummy flag for cls
+		cfCls             = b00000001,
 	// flags for display entry mode set
-		caEmsEntryRight   = b00000010,
-	    caEmsEntryLeft    = b00000000,
-	    caEmsShiftEnable  = b00000001,//Shifts the entire display
-		caEmsShiftDisable = b00000000,
+		cfEmsEntryRight   = b00000110,
+	    cfEmsEntryLeft    = b00000100,
+	    cfEmsShiftEnable  = b00000101,//Shifts the entire display
+		cfEmsShiftDisable = b00000100,
 	// flags for display on/off control
-		caDooScreenOn     = b00000100,
-	    caDooScreenOff    = b00000000,
-		caDooCursorOn     = b00000010,
-		caDooCursorOff    = b00000000,
-		caDooCurBlinkOn   = b00000001,
-	    caDooCurBlinkOff  = b00000000,
-		caSsShiftDisplay  = b00001000,
-		caSsMoveCursor    = b00000000,
-		caSsShiftRight    = b00000100,
-		caSsShiftLeft     = b00000000,
-	// flags for function set
-		caFs8BitMode      = b00010000,
-		caFs4BitMode      = b00000000,
-	    caFs2Line         = b00001000,
-	    caFs1Line         = b00000000,
-		caFs5x10Dots      = b00000100,
-		caFs5x8Dots       = b00000000
+		cfDooScreenOn     = b00001100,
+	    cfDooScreenOff    = b00001000,
+		cfDooCursorOn     = b00001010,
+		cfDooCursorOff    = b00001000,
+		cfDooCurBlinkOn   = b00001001,
+	    cfDooCurBlinkOff  = b00001000,
+    // flags for Screen Shift 
+		cfSsShiftDisplay  = b00011000,
+		cfSsMoveCursor    = b00010000,
+		cfSsShiftRight    = b00010100,
+		cfSsShiftLeft     = b00010000,
+	// flags for Function Set
+		cfFs8BitMode      = b00110000,
+		cfFs4BitMode      = b00100000,
+	    cfFs2Line         = b00101000,
+	    cfFs1Line         = b00100000,
+		cfFs5x10Dots      = b00100100,
+		cfFs5x8Dots       = b00100000
 	    
 	    
 };
@@ -135,7 +138,7 @@ void SegDisplay(uint32 num);         		 //控制数码管显示数字
 void Delay992us();							 //延时一个奇怪的时间，供delay函数使用				
 void Delay(uint16 ms);						 //延时
 void Latch573(enum LatchSelectEnum which,uint8 aData);            //控制板子上的三个锁存器
-void Lcd1602Cmd(uint8 Cmd);				     //向1602发送指令
+void Lcd1602Cmd(enum Lcd1602CmdEnum CmdType,enum Lcd1602CmdFlagsEnum CmdFlags);				     //向1602发送指令
 void Lcd1602Data(uint8 aData);				 //向1602发送数据
 
 #endif //_USING_TX1C_CUSTOM_FUNCTIONS_
