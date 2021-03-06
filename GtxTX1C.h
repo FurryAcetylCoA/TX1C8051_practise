@@ -80,7 +80,7 @@ sbit C02_SDA  = P2^0;
 extern uint8c SegmentDisplay7CC[10];
 
 enum LatchSelectEnum{
-		kSEG_WLE = b10000000,
+		kSEG_WLE = b10000000,//P27
 		kSEG_DLE = b01000000,
 		kLED_LE  = b00100000,
 		kALL_LE  = b11100000

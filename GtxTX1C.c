@@ -23,14 +23,8 @@ void Delay992us(){ //函数跳转和上层Delay函数循环变量的自减需要
 }
 
 void SingleSegDisplay(uint8 which,uint8 num){
-	P26=0;
-	P27=0;
-	P0=0xFF^(1<<which);
-	P27=1;
-	P27=0;
-	P0=SegmentDisplay7CC[num];
-	P26=1;
-	P26=0;
+	Latch573(kSEG_WLE,0xFF^(1<<which));
+	Latch573(kSEG_DLE,SegmentDisplay7CC[num]);
 }
 
 void SegDisplay(uint32 num){	//控制数码管显示数字,右对齐
