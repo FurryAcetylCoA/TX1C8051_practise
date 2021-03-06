@@ -56,10 +56,9 @@ void Latch573(enum LatchSelectEnum which,uint8 aData){   //控制锁存器
 
 void Lcd1602Cmd(uint8 Cmd){
 	LCD_RS=0;
-	Delay(90);
 	P0=Cmd;
 	LCD_EN=1;
-	Delay(90);
+	Delay(10);
 	LCD_EN=0;
 }			    
 
@@ -67,7 +66,7 @@ void Lcd1602Data(uint8 aData){
 	LCD_RS=1;
 	P0=aData;
 	LCD_EN=1;
-	Delay(20);
+	Delay(10);
 	LCD_EN=0;
 }
 

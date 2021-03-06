@@ -10,7 +10,7 @@ GtxTX1C.h
 
 #include <stc\STC89C5xRC.H>
 #include <intrins.h>
-
+#include "Bin2Hex\BintoHex.h"
 
 
 #define _DEPENDANCY_OF_TX1C_C_FILE_ //注释此宏后 本头文件将不再依赖GtxTX1C.c
@@ -37,8 +37,8 @@ typedef signed int    int16;
 typedef signed long   int32;
 
 typedef bit           bool;
-#define true          1;
-#define false         0;
+#define true          1
+#define false         0
 
 
 //管脚
@@ -80,10 +80,49 @@ sbit C02_SDA  = P2^0;
 extern uint8c SegmentDisplay7CC[10];
 
 enum LatchSelectEnum{
-		kSEG_DLE=0x40,//P26
-		kSEG_WLE=0x80,//P27
-		kLED_LE=0x20,
-		kALL_LE=0xE0
+		kSEG_WLE = b10000000,
+		kSEG_DLE = b01000000,
+		kLED_LE  = b00100000,
+		kALL_LE  = b11100000
+};
+
+enum Lcd1602CmdEnum{
+	    cCls          = b00000001, //1.5ms
+		cCR           = b00000011, //37us 
+	    cEntryModeSet = b00000111,
+	    cDisplayOnOff = b00001111,
+	    cScreenShift  = b00011111, //向左\右 移动整个屏幕\光标
+	    cFunctionSet  = b00111111, //基本配置 需要先设置本条
+	    cCGRAMAddSet  = b01111111,
+	    cDDRAMAddSet  = b11111111    
+};
+
+enum Lcd1602CmdFlagsEnum{
+	// flags for display entry mode set
+		caEmsEntryRight   = b00000010,
+	    caEmsEntryLeft    = b00000000,
+	    caEmsShiftEnable  = b00000001,//Shifts the entire display
+		caEmsShiftDisable = b00000000,
+	// flags for display on/off control
+		caDooScreenOn     = b00000100,
+	    caDooScreenOff    = b00000000,
+		caDooCursorOn     = b00000010,
+		caDooCursorOff    = b00000000,
+		caDooCurBlinkOn   = b00000001,
+	    caDooCurBlinkOff  = b00000000,
+		caSsShiftDisplay  = b00001000,
+		caSsMoveCursor    = b00000000,
+		caSsShiftRight    = b00000100,
+		caSsShiftLeft     = b00000000,
+	// flags for function set
+		caFs8BitMode      = b00010000,
+		caFs4BitMode      = b00000000,
+	    caFs2Line         = b00001000,
+	    caFs1Line         = b00000000,
+		caFs5x10Dots      = b00000100,
+		caFs5x8Dots       = b00000000
+	    
+	    
 };
 #endif // _USING_TX1C_CUSTOM_CONSTS_
 
