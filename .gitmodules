@@ -1,0 +1,3 @@
+[submodule "Bin2Hex"]
+	path = Bin2Hex
+	url = https://github.com/FurryAcetylCoA/Bin-to-Hex-macro.git

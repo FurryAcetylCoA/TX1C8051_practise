@@ -396,6 +396,11 @@
               <FileType>1</FileType>
               <FilePath>.\GtxTX1C.c</FilePath>
             </File>
+            <File>
+              <FileName>BintoHex.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Bin2Hex\BintoHex.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
