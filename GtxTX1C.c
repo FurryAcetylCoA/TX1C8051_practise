@@ -51,7 +51,8 @@ void Lcd1602Cmd(enum Lcd1602CmdEnum CmdType,enum Lcd1602CmdFlagsEnum CmdFlags){ 
 	LCD_RS=0;
 	P0=CmdType&CmdFlags;
 	LCD_EN=1;
-	Delay(10);
+	Delay(5);
+	if(CmdType==cCls){Delay(800);}
 	LCD_EN=0;
 }			    
 
@@ -59,7 +60,11 @@ void Lcd1602Data(uint8 aData){
 	LCD_RS=1;
 	P0=aData;
 	LCD_EN=1;
-	Delay(10);
+	Delay(5);
 	LCD_EN=0;
 }
 
+char putchar (char c){
+	Lcd1602Data(c);
+	return c;//例程那里是返回这个的 我也不知道为什么
+}
